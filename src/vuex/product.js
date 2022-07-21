@@ -9,22 +9,28 @@ export const prodModule = {
 
     },
     mutations: {
-       add(state,prod){
-           state.products.push(prod)
-       },
-        inLocal(){
-            if(localStorage['prod']){
+        add(state, prod) {
+            state.products.push(prod)
+        },
+        del(state, prod) {
+            state.products.splice(state.products.indexOf(prod), 1)
+        },
+        inLocal() {
+            if (localStorage['prod']) {
                 console.log(localStorage)
             }
         },
     },
     actions: {
-        inLocalStorage({commit}){
+        inLocalStorage({commit}) {
             commit('inLocal')
         },
-        addProd({commit},prod){
-            commit('add',prod)
-        }
+        addProd({commit}, prod) {
+            commit('add', prod)
         },
+        delProd({commit}, prod) {
+            commit('del', prod)
+        }
+    },
     namespaced: true
 }
