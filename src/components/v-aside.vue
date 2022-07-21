@@ -1,6 +1,7 @@
 <template>
       <aside class="aside">
-            <div class="aside__body">
+            <div class="aside__body"
+            @mousemove="active">
                   <div class="aside__body__p">
                         <p class="aside__body__p">Наименование товара</p>
                         <div class="aside__body__p__point"></div>
@@ -126,10 +127,15 @@ export default {
                                  break;
                      }
                }
-               if  (this.prod.count && this.prod.href && this.prod.name){
-                 let btn = document.getElementById('btn');
-                     btn.className = 'active'
-               }
+                  this.active();
+            },
+            active(){
+                  let btn = document.getElementById('btn');
+                  if  (this.prod.count && this.prod.href && this.prod.name){
+                        btn.className = 'active'
+                  } else {
+                        btn.className = "aside__body__btn"
+                  }
             }
       },
 }
