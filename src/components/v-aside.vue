@@ -89,14 +89,21 @@ export default {
                   addProd: 'product/addProd'
             }),
             add() {
-                  if (typeof this.prod.count === "number" && this.prod.href && this.prod.name) {
+                  if (this.prod.count && this.prod.href && this.prod.name) {
                         console.log(this.prod.count)
                         this.addProd({...this.prod});
+                        this.prod.count = '';
+                        this.prod.href = '';
+                        this.prod.description = '';
+                        this.prod.name = '';
+                        this.visibleName = false
+                        this.visibleHref = false
+                        this.visibleCount = false
+                        let btn = document.getElementById('btn');
+                        btn.className = "aside__body__btn"
                   }
-                  this.prod.count = '';
-                  this.prod.href = '';
-                  this.prod.description = '';
-                  this.prod.name = '';
+
+
             },
             validation(value,res) {
 
@@ -119,8 +126,9 @@ export default {
                                  break;
                      }
                }
-               if (this.visibleName && this.visibleHref && this.visibleCount){
-                  // let btn = document.getElementById('btn')
+               if  (this.prod.count && this.prod.href && this.prod.name){
+                 let btn = document.getElementById('btn');
+                     btn.className = 'active'
                }
             }
       },
@@ -251,6 +259,7 @@ export default {
                   border: none;
                   background: #EEEEEE;
                   border-radius: 10px;
+                  transition: 0.4s;
 
                   font-family: 'Inter';
                   font-style: normal;
@@ -268,21 +277,24 @@ export default {
 
             }
       }
-
-      //&__body p {
-      //      margin: 0 0 4px;
-      //      font-family: 'Source Sans Pro';
-      //      font-style: normal;
-      //      font-weight: 400;
-      //      font-size: 10px;
-      //      line-height: 13px;
-      //      /* identical to box height */
-      //
-      //      /* Temp / Darks / Lesser */
-      //
-      //      color: #49485E;
-      //
-      //}
 }
+.active{
+      margin: 8px 0 0;
+      width: 284px;
+      height: 36px;
+      border: none;
+      background: #7BAE73;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      transition: 0.4s;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      /* identical to box height */
 
+      color: #FFFFFF;
+
+}
 </style>
