@@ -4,10 +4,12 @@
                   <v-aside class="body__asidebody__aside"/>
             </div>
             <div class="body__item">
+                  <transition-group name="item">
                   <v-item v-for="prod in products"
                           :key="prod"
                           :product_data="prod"
                   />
+                  </transition-group>
             </div>
       </div>
 
@@ -36,6 +38,7 @@ export default {
       display: flex;
 
       &__item {
+            transition: 0.4s;
             display: flex;
             flex-wrap: wrap;
             flex: 1;
@@ -50,5 +53,14 @@ export default {
                   position: fixed;
             }
       }
+}
+.item-enter-active,
+.item-leave-active {
+      transition: all 0.5s ease;
+}
+.item-enter-from,
+.item-leave-to {
+      opacity: 0;
+      transform: translateX(30px);
 }
 </style>
