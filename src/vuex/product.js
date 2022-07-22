@@ -10,6 +10,9 @@ export const prodModule = {
     },
     mutations: {
         add(state, prod) {
+            if(prod.count){
+                prod.count = prod.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+" руб.";
+            }
             state.products.push(prod)
         },
         del(state, prod) {
