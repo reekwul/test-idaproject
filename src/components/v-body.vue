@@ -54,6 +54,7 @@ export default {
             }
       }
 }
+.item-move,
 .item-enter-active,
 .item-leave-active {
       transition: all 0.5s ease;
@@ -62,5 +63,8 @@ export default {
 .item-leave-to {
       opacity: 0;
       transform: translateX(30px);
+}
+.item-leave-active {
+      position: absolute;
 }
 </style>
