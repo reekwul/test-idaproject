@@ -14,13 +14,15 @@ export const prodModule = {
                 prod.count = prod.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+" руб.";
             }
             state.products.push(prod)
+            localStorage.setItem('prod',JSON.stringify(state.products))
         },
         del(state, prod) {
             state.products.splice(state.products.indexOf(prod), 1)
+            localStorage.setItem('prod',JSON.stringify(state.products))
         },
-        inLocal() {
-            if (localStorage['prod']) {
-                console.log(localStorage)
+        inLocal(state) {
+            if (localStorage.prod) {
+                state.products = JSON.parse(localStorage.prod)
             }
         },
     },
