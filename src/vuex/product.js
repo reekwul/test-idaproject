@@ -5,17 +5,15 @@ export const prodModule = {
     }),
     getters: {
         Prod(state) {
-            return state.sorted === 'name' ? state.products.sort((a, b) => a.name?.localeCompare(b.name)) :
+            let res = [...state.products];
+            return state.sorted === 'name' ? res.sort((a, b) => a.name?.localeCompare(b.name)) :
 
-                state.sorted === 'min' ? state.products.sort((a, b) => a.count - b.count) :
+                state.sorted === 'min' ? res.sort((a, b) => a.count - b.count) :
 
-                    state.sorted === 'max' ? state.products.sort((a, b) => b.count - a.count) :
+                    state.sorted === 'max' ? res.sort((a, b) => b.count - a.count) :
 
-                        state.products;
+                        res;
         },
-        Value(state) {
-            return state.sorted
-        }
     },
     mutations: {
         add(state, prod) {

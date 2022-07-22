@@ -17,13 +17,14 @@
 import VItem from "@/components/v-item";
 import VAside from "@/components/v-aside";
 import {mapGetters} from "vuex";
+
 export default {
       name: "v-body",
       components: {VAside, VItem},
       computed: {
             ...mapGetters({
                   products: 'product/Prod',
-                  value:'product/Value'
+                  value: 'product/Value'
             }),
 
       },

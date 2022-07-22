@@ -1,5 +1,5 @@
 <template>
-    <v-wrapper/>
+      <v-wrapper/>
 </template>
 
 <script>
@@ -9,10 +9,10 @@ import VWrapper from "@/components/v-wrapper";
 import {mapActions} from "vuex";
 
 export default {
-  name: 'App',
-  components: {
-      VWrapper
-  },
+      name: 'App',
+      components: {
+            VWrapper
+      },
       methods: {
             ...mapActions({
                   inLocal: 'product/inLocalStorage',
@@ -25,8 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
-#app{
-    display: flex;
-    justify-content: center;
+#app {
+      display: flex;
+      justify-content: center;
 }
 </style>

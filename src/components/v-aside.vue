@@ -1,7 +1,7 @@
 <template>
       <aside class="aside">
             <div class="aside__body"
-            @mousemove="active">
+                 @mousemove="active">
                   <div class="aside__body__p">
                         <p class="aside__body__p">Наименование товара</p>
                         <div class="aside__body__p__point"></div>
@@ -62,7 +62,7 @@
                   </div>
 
                   <button id="btn"
-                        class="aside__body__btn"
+                          class="aside__body__btn"
                           @click="add"
                   >Добавить товар
                   </button>
@@ -109,57 +109,63 @@ export default {
 
 
             },
-            validation(value,res) {
+            validation(value, res) {
 
-               if(value){
-                     switch (res){
-                           case 'name': this.visibleName = false
-                                 break;
-                           case 'href': this.visibleHref = false
-                                 break;
-                           case 'count': this.visibleCount = false
-                                 break;
-                     }
-               }else{
-                     switch (res){
-                           case 'name': this.visibleName = true
-                                 break;
-                           case 'href': this.visibleHref = true
-                                 break;
-                           case 'count': this.visibleCount = true
-                                 break;
-                     }
-               }
+                  if (value) {
+                        switch (res) {
+                              case 'name':
+                                    this.visibleName = false
+                                    break;
+                              case 'href':
+                                    this.visibleHref = false
+                                    break;
+                              case 'count':
+                                    this.visibleCount = false
+                                    break;
+                        }
+                  } else {
+                        switch (res) {
+                              case 'name':
+                                    this.visibleName = true
+                                    break;
+                              case 'href':
+                                    this.visibleHref = true
+                                    break;
+                              case 'count':
+                                    this.visibleCount = true
+                                    break;
+                        }
+                  }
                   this.active();
             },
-            active(){
+            active() {
                   let btn = document.getElementById('btn');
-                  if  (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number'){
+                  if (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number') {
                         btn.className = 'active'
                   } else {
                         btn.className = "aside__body__btn"
                   }
             }
       },
-      watch:{
-            visibleName(newValue){
-                  if(newValue){
+      watch: {
+            visibleName(newValue) {
+                  if (newValue) {
                         document.getElementById('name').style.border = "1px solid #FF8484"
-                  }else{
+                  } else {
                         document.getElementById('name').style.border = "none"
                   }
             },
-            visibleHref(newValue){
-                  if(newValue){
+            visibleHref(newValue) {
+                  if (newValue) {
                         document.getElementById('href').style.border = "1px solid #FF8484"
-                  }else{
+                  } else {
                         document.getElementById('href').style.border = "none"
                   }
             },
-            visibleCount(newValue){
-                  if(newValue){
+            visibleCount(newValue) {
+                  if (newValue) {
                         document.getElementById('count').style.border = "1px solid #FF8484"
-                  }else{
+                  } else {
                         document.getElementById('count').style.border = "none"
                   }
             },
@@ -214,8 +220,9 @@ export default {
                   }
             }
 
-            &__block{
+            &__block {
                   position: relative;
+
                   &__inpt {
                         margin: 0 0 16px;
                         width: 284px;
@@ -242,22 +249,24 @@ export default {
 
                         color: #B4B4B4;
                   }
-                  &__p{
+
+                  &__p {
                         margin: 4px 0 2px;
-                       position: absolute;
-                       bottom: -2px;
+                        position: absolute;
+                        bottom: -2px;
 
-                       font-family: 'Source Sans Pro';
-                       font-style: normal;
-                       font-weight: 400;
-                       font-size: 8px;
-                       line-height: 10px;
-                       /* identical to box height */
+                        font-family: 'Source Sans Pro';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 8px;
+                        line-height: 10px;
+                        /* identical to box height */
 
 
-                       color: #FF8484;
-                 }
+                        color: #FF8484;
+                  }
             }
+
             &__text {
                   margin: 0 0 16px;
                   box-sizing: border-box;
@@ -310,7 +319,8 @@ export default {
             }
       }
 }
-.active{
+
+.active {
       margin: 8px 0 0;
       width: 284px;
       height: 36px;
