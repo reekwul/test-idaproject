@@ -2,7 +2,7 @@
     <div class="head">
         <h1 class="head__h">Добавление товара</h1>
         <v-my-select
-            v-model="modelValue"
+
         />
 </div>
 </template>
@@ -12,11 +12,6 @@ import VMySelect from "@/components/ui-componnt/v-my-select";
 export default {
     name: "v-header",
     components: {VMySelect},
-    data(){
-        return{
-            modelValue:''
-        }
-    }
 }
 </script>
 

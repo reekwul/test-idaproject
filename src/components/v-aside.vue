@@ -8,6 +8,7 @@
                   </div>
                   <div class="aside__body__block">
                         <input
+                              id="name"
                               class="aside__body__block__inpt"
                               placeholder="Введите наименование товара"
                               v-model="prod.name"
@@ -30,6 +31,7 @@
                   </div>
                   <div class="aside__body__block">
                         <input
+                              id="href"
                               class="aside__body__block__inpt"
                               placeholder="Введите ссылку"
                               v-model="prod.href"
@@ -47,6 +49,7 @@
                   </div>
                   <div class="aside__body__block">
                         <input
+                              id="count"
                               class="aside__body__block__inpt"
                               placeholder="Введите цену"
                               v-model.number="prod.count"
@@ -90,7 +93,7 @@ export default {
                   addProd: 'product/addProd'
             }),
             add() {
-                  if (this.prod.count && this.prod.href && this.prod.name) {
+                  if (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number') {
                         console.log(this.prod.count)
                         this.addProd({...this.prod});
                         this.prod.count = '';
@@ -131,12 +134,35 @@ export default {
             },
             active(){
                   let btn = document.getElementById('btn');
-                  if  (this.prod.count && this.prod.href && this.prod.name){
+                  if  (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number'){
                         btn.className = 'active'
                   } else {
                         btn.className = "aside__body__btn"
                   }
             }
+      },
+      watch:{
+            visibleName(newValue){
+                  if(newValue){
+                        document.getElementById('name').style.border = "1px solid #FF8484"
+                  }else{
+                        document.getElementById('name').style.border = "none"
+                  }
+            },
+            visibleHref(newValue){
+                  if(newValue){
+                        document.getElementById('href').style.border = "1px solid #FF8484"
+                  }else{
+                        document.getElementById('href').style.border = "none"
+                  }
+            },
+            visibleCount(newValue){
+                  if(newValue){
+                        document.getElementById('count').style.border = "1px solid #FF8484"
+                  }else{
+                        document.getElementById('count').style.border = "none"
+                  }
+            },
       },
 }
 </script>
@@ -290,7 +316,7 @@ export default {
       height: 36px;
       border: none;
       background: #7BAE73;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       transition: 0.4s;
       font-family: 'Inter';

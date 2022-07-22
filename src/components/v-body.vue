@@ -4,7 +4,7 @@
                   <v-aside class="body__asidebody__aside"/>
             </div>
             <div class="body__item">
-                  <v-item v-for="prod in this.products"
+                  <v-item v-for="prod in products"
                           :key="prod"
                           :product_data="prod"
                   />
@@ -22,8 +22,10 @@ export default {
       components: {VAside, VItem},
       computed: {
             ...mapGetters({
-                  products: 'product/Prod'
+                  products: 'product/Prod',
+                  value:'product/Value'
             }),
+
       },
 }
 </script>

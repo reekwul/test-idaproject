@@ -20,7 +20,7 @@
                     <h3 class="item__body__name">{{product_data.name}}</h3>
                     <p class="item__body__description">{{product_data.description}}</p>
                 </div>
-                <h2 class="item__body__count">{{product_data.count}}</h2>
+                <h2 class="item__body__count">{{countMask}}</h2>
             </div>
 </div>
 </template>
@@ -47,7 +47,12 @@ export default {
         ...mapActions({
             delProd:'product/delProd'
         }),
-    }
+    },
+      computed:{
+          countMask(){
+              return   this.product_data.count.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+" руб."
+          }
+      }
 }
 </script>
 

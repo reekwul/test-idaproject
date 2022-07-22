@@ -1,22 +1,27 @@
 <template>
     <select class="select" @change="changeOption">
-        <option class="select__opt" selected value="По умолчанию">По умолчанию</option>
+        <option class="select__opt" selected value="default">По умолчанию</option>
         <option class="select__opt" value="min">Подешевле</option>
         <option class="select__opt" value="max">Подороже</option>
-        <option class="select__opt" value="nam">По наименованию</option>
+        <option class="select__opt" value="name">По наименованию</option>
     </select>
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
     name: "v-my-select",
     data() {
         return {}
     },
     methods:{
+          ...mapActions({
+                value:'product/sortProd'
+          }),
         changeOption(event){
             console.log(event.target.value)
-            this.$emit('update:modelValue', event.target.value)
+            this.value(event.target.value)
         }
     }
 }
