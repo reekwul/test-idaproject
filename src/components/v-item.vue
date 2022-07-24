@@ -64,7 +64,6 @@ export default {
       margin-bottom: 16px;
       box-sizing: border-box;
       position: relative;
-      z-index: 0;
       background: #FFFEFB;
       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
       border-radius: 4px;
@@ -78,7 +77,6 @@ export default {
             right: -8px;
             width: 32px;
             height: 32px;
-            z-index: 1;
             background: #FF8484;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
@@ -94,6 +92,9 @@ export default {
       }
 
       &__img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             box-sizing: border-box;
             width: 332px;
             height: 200px;

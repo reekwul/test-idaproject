@@ -1,9 +1,7 @@
 <template>
       <div class="head">
             <h1 class="head__h">Добавление товара</h1>
-            <v-my-select
-
-            />
+            <v-my-select />
       </div>
 </template>
 
@@ -29,7 +27,6 @@ export default {
             width: 247px;
             height: 35px;
             margin: 32px 32px 16px;
-
 
             font-family: 'Source Sans Pro';
             font-style: normal;

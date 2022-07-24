@@ -1,5 +1,4 @@
 <template>
-
       <div class="wrapper">
             <v-header/>
             <v-body/>

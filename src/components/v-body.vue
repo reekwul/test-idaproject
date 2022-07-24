@@ -12,7 +12,6 @@
                   </transition-group>
             </div>
       </div>
-
 </template>
 
 <script>
@@ -26,9 +25,7 @@ export default {
       computed: {
             ...mapGetters({
                   products: 'product/Prod',
-                  value: 'product/Value'
             }),
-
       },
 }
 </script>
@@ -57,7 +54,7 @@ export default {
 .item-move,
 .item-enter-active,
 .item-leave-active {
-      transition: all 0.5s ease;
+      transition: all 0.6s ease;
 }
 .item-enter-from,
 .item-leave-to {

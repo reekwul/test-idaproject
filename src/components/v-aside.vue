@@ -2,67 +2,58 @@
       <aside class="aside">
             <div class="aside__body"
                  @mousemove="active">
-                  <div class="aside__body__p">
-                        <p class="aside__body__p">Наименование товара</p>
-                        <div class="aside__body__p__point"></div>
-                  </div>
+                  <p class="aside__body__legend --obligatory">Наименование товара</p>
                   <div class="aside__body__block">
                         <input
-                              id="name"
-                              class="aside__body__block__inpt"
+                              class="aside__body__inp"
+                              :class="{error:visibleName}"
                               placeholder="Введите наименование товара"
                               v-model="prod.name"
                               @focusout="validation(prod.name,'name')"
                         >
                         <p
                               v-if="visibleName"
-                              class="aside__body__block__p"
+                              class="aside__body__err"
                         >Поле является обязательным</p>
                   </div>
-                  <p class="aside__body__p">Описание товара</p>
+
+                  <p class="aside__body__legend">Описание товара</p>
                   <textarea
-                        class="aside__body__text"
+                        class="aside__body__description"
                         placeholder="Введите описание товара"
                         v-model="prod.description"
                   ></textarea>
-                  <div class="aside__body__p">
-                        <p class="aside__body__p">Ссылка на изображение товара</p>
-                        <div class="aside__body__p__point"></div>
-                  </div>
+                  <p class="aside__body__legend --obligatory">Ссылка на изображение товара</p>
                   <div class="aside__body__block">
                         <input
-                              id="href"
-                              class="aside__body__block__inpt"
+                              class="aside__body__inp"
+                              :class="{error:visibleHref}"
                               placeholder="Введите ссылку"
                               v-model="prod.href"
                               @focusout="validation(prod.href,'href')"
                         >
                         <p
                               v-if="visibleHref"
-                              class="aside__body__block__p"
+                              class="aside__body__err"
                         >Поле является обязательным</p>
                   </div>
-
-                  <div class="aside__body__p">
-                        <p class="aside__body__p">Цена товара</p>
-                        <div class="aside__body__p__point"></div>
-                  </div>
+                  <p class="aside__body__legend --obligatory">Цена товара</p>
                   <div class="aside__body__block">
                         <input
-                              id="count"
-                              class="aside__body__block__inpt"
+                              class="aside__body__inp"
+                              :class="{error:visibleCount}"
                               placeholder="Введите цену"
                               v-model.number="prod.count"
                               @focusout="validation(prod.count,'count')"
                         >
                         <p
                               v-if="visibleCount"
-                              class="aside__body__block__p"
+                              class="aside__body__err"
                         >Поле является обязательным</p>
                   </div>
-
                   <button id="btn"
                           class="aside__body__btn"
+                          :class="{active:this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number'}"
                           @click="add"
                   >Добавить товар
                   </button>
@@ -78,9 +69,9 @@ export default {
       data() {
             return {
                   prod: {
-                        name: String(),
-                        description: String(),
-                        href: String(),
+                        name: '',
+                        description: '',
+                        href: '',
                         count: '',
                   },
                   visibleName: false,
@@ -88,13 +79,13 @@ export default {
                   visibleCount: false,
             }
       },
+      computed: {},
       methods: {
             ...mapActions({
                   addProd: 'product/addProd'
             }),
             add() {
                   if (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number') {
-                        console.log(this.prod.count)
                         this.addProd({...this.prod});
                         this.prod.count = '';
                         this.prod.href = '';
@@ -103,14 +94,9 @@ export default {
                         this.visibleName = false
                         this.visibleHref = false
                         this.visibleCount = false
-                        let btn = document.getElementById('btn');
-                        btn.className = "aside__body__btn"
                   }
-
-
             },
             validation(value, res) {
-
                   if (value) {
                         switch (res) {
                               case 'name':
@@ -136,38 +122,6 @@ export default {
                                     break;
                         }
                   }
-                  this.active();
-            },
-            active() {
-                  let btn = document.getElementById('btn');
-                  if (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number') {
-                        btn.className = 'active'
-                  } else {
-                        btn.className = "aside__body__btn"
-                  }
-            }
-      },
-      watch: {
-            visibleName(newValue) {
-                  if (newValue) {
-                        document.getElementById('name').style.border = "1px solid #FF8484"
-                  } else {
-                        document.getElementById('name').style.border = "none"
-                  }
-            },
-            visibleHref(newValue) {
-                  if (newValue) {
-                        document.getElementById('href').style.border = "1px solid #FF8484"
-                  } else {
-                        document.getElementById('href').style.border = "none"
-                  }
-            },
-            visibleCount(newValue) {
-                  if (newValue) {
-                        document.getElementById('count').style.border = "1px solid #FF8484"
-                  } else {
-                        document.getElementById('count').style.border = "none"
-                  }
             },
       },
 }
@@ -186,116 +140,93 @@ export default {
       box-shadow: 0 20px 30px rgba(0, 0, 0, 0.04), 0 6px 10px rgba(0, 0, 0, 0.02);
 
       &__body {
-            margin: 24px;
             display: flex;
             flex-direction: column;
-
+            position: relative;
 
             font-family: 'Source Sans Pro';
-            font-style: normal;
+            font-weight: 400;
             font-size: 10px;
             line-height: 13px;
             color: #49485E;
 
-            &__p {
-                  display: flex;
-
+            &__legend {
+                  align-self: flex-start;
+                  position: relative;
                   margin: 0 0 4px;
-                  font-family: 'Source Sans Pro';
-                  font-style: normal;
-                  font-weight: 400;
-                  font-size: 10px;
-                  line-height: 13px;
-                  /* identical to box height */
 
-                  /* Temp / Darks / Lesser */
-
-                  color: #49485E;
-
-                  &__point {
-                        width: 4px;
-                        height: 4px;
-                        background: #FF8484;
-                        border-radius: 4px;
+                  &.--obligatory {
+                        &::after {
+                              content: "";
+                              display: block;
+                              position: absolute;
+                              top: 0;
+                              right: -4px;
+                              width: 4px;
+                              height: 4px;
+                              border-radius: 50%;
+                              background-color: #FF8484;
+                        }
                   }
             }
 
             &__block {
                   position: relative;
+            }
 
-                  &__inpt {
-                        margin: 0 0 16px;
-                        width: 284px;
-                        height: 36px;
-                        box-sizing: border-box;
+            &__inp {
+                  transition: 0.1s;
+                  margin: 0 0 16px;
+                  padding: 0 16px;
+                  width: 284px;
+                  height: 36px;
+                  box-sizing: border-box;
 
-                        border: none;
-                        /* Darks & Whites / White */
+                  border: none;
+                  border-radius: 4px;
+                  background: #FFFEFB;
+                  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-                        background: #FFFEFB;
-                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                        border-radius: 4px;
-
-                        padding: 0 16px;
-                        font-family: 'Source Sans Pro';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-size: 12px;
-                        line-height: 15px;
-                        /* identical to box height */
-
-
-                        /* Greys / 500 */
-
-                        color: #B4B4B4;
-                  }
-
-                  &__p {
-                        margin: 4px 0 2px;
-                        position: absolute;
-                        bottom: -2px;
-
-                        font-family: 'Source Sans Pro';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-size: 8px;
-                        line-height: 10px;
-                        /* identical to box height */
-
-
-                        color: #FF8484;
+                  font-size: 12px;
+                  line-height: 15px;
+                  color: #B4B4B4;
+                  &:focus{
+                        border: 2px solid #FF8484;
                   }
             }
 
-            &__text {
+            &__err {
+                  margin: 4px 0 2px;
+                  position: absolute;
+                  bottom: 0;
+                  font-size: 8px;
+                  line-height: 10px;
+                  color: #FF8484;
+            }
+
+            &__description {
+                  transition: 0.1s;
                   margin: 0 0 16px;
                   box-sizing: border-box;
                   resize: none;
-                  width: 284px;
                   height: 108px;
                   border: none;
-                  /* Darks & Whites / White */
 
-                  padding: 10px 16px;
                   background: #FFFEFB;
+                  padding: 10px 16px;
                   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                   border-radius: 4px;
 
-                  font-family: 'Source Sans Pro';
-                  font-style: normal;
-                  font-weight: 400;
                   font-size: 12px;
                   line-height: 15px;
-                  /* identical to box height */
-                  /* Greys / 500 */
-
                   color: #B4B4B4;
-
+                  &:focus{
+                        border: 2px solid #FF8484;
+                  }
             }
 
             &__btn {
                   margin: 8px 0 0;
-                  width: 284px;
                   height: 36px;
                   border: none;
                   background: #EEEEEE;
@@ -303,7 +234,6 @@ export default {
                   transition: 0.4s;
 
                   font-family: 'Inter';
-                  font-style: normal;
                   font-weight: 600;
                   font-size: 12px;
                   line-height: 15px;
@@ -338,5 +268,9 @@ export default {
 
       color: #FFFFFF;
 
+}
+
+.error {
+      border: 2px solid #FF8484;
 }
 </style>

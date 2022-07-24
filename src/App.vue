@@ -24,9 +24,5 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#app {
-      display: flex;
-      justify-content: center;
-}
+<style lang="scss" scoped>
 </style>
