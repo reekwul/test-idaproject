@@ -1,16 +1,16 @@
 # test-idaproject
 
-## Project setup
+## Настройка проекта
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Компилирует и перезагружает для разработки
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Компилирует и минимизирует для производства
 ```
 npm run build
 ```
