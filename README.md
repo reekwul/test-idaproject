@@ -16,5 +16,6 @@ npm run build
 ```
 
 Node верия v17.6.0
-###[Ссылка на развернутый проект](https://reekwul-test-idaproject.netlify.app/)
+###Ссылки:
+[Ссылка на развернутый проект](https://reekwul-test-idaproject.netlify.app/)
 
