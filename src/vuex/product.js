@@ -18,16 +18,15 @@ export const prodModule = {
     mutations: {
         add(state, prod) {
             state.products.push(prod)
-            localStorage.setItem('prod', JSON.stringify(state.products))
+
         },
         del(state, prod) {
             state.products.splice(state.products.indexOf(prod), 1)
-            localStorage.setItem('prod', JSON.stringify(state.products))
+
         },
         inLocal(state) {
-            if (localStorage.prod) {
                 state.products = JSON.parse(localStorage.prod)
-            }
+
         },
         sort(state, value) {
             state.sorted = value
@@ -35,13 +34,18 @@ export const prodModule = {
     },
     actions: {
         inLocalStorage({commit}) {
-            commit('inLocal')
-        },
-        addProd({commit}, prod) {
+            if (localStorage.prod) {
+                commit('inLocal')
+            }
+            },
+        addProd({commit,state}, prod) {
             commit('add', prod)
+
+            localStorage.setItem('prod', JSON.stringify(state.products))
         },
-        delProd({commit}, prod) {
+        delProd({commit,state}, prod) {
             commit('del', prod)
+            localStorage.setItem('prod', JSON.stringify(state.products))
         },
         sortProd({commit}, value) {
             commit('sort', value)

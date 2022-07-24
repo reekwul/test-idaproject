@@ -17,7 +17,7 @@
                         >Поле является обязательным</p>
                   </div>
 
-                  <p class="aside__body__legend">Описание товара</p>
+                  <p class="aside__legend">Описание товара</p>
                   <textarea
                         class="aside__body__description"
                         placeholder="Введите описание товара"
@@ -52,8 +52,8 @@
                         >Поле является обязательным</p>
                   </div>
                   <button id="btn"
-                          class="aside__body__btn"
-                          :class="{active:this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number'}"
+                          class="aside__btn"
+                          :class="{active:isFormValid}"
                           @click="add"
                   >Добавить товар
                   </button>
@@ -64,61 +64,73 @@
 <script>
 import {mapActions} from 'vuex'
 
+const prodPattern = {
+      name: '',
+      description: '',
+      href: '',
+      count: '',
+}
+
 export default {
       name: "v-aside",
       data() {
             return {
                   prod: {
-                        name: '',
-                        description: '',
-                        href: '',
-                        count: '',
+                        ...prodPattern
                   },
                   visibleName: false,
                   visibleHref: false,
                   visibleCount: false,
             }
       },
-      computed: {},
+      computed: {
+            isFormValid() {
+                  return this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number'
+            }
+      },
       methods: {
             ...mapActions({
                   addProd: 'product/addProd'
             }),
             add() {
-                  if (this.prod.count && this.prod.href && this.prod.name && typeof this.prod.count === 'number') {
-                        this.addProd({...this.prod});
-                        this.prod.count = '';
-                        this.prod.href = '';
-                        this.prod.description = '';
-                        this.prod.name = '';
-                        this.visibleName = false
-                        this.visibleHref = false
-                        this.visibleCount = false
+                  if (!this.isFormValid) return;
+                  this.addProd({...this.prod});
+                  this.resetProd()
+                  this.resetVisible()
+            },
+            resetProd() {
+                  this.prod = {
+                        ...prodPattern
                   }
+            },
+            resetVisible() {
+                  this.visibleName = false;
+                  this.visibleHref = false;
+                  this.visibleCount = false;
             },
             validation(value, res) {
                   if (value) {
                         switch (res) {
                               case 'name':
-                                    this.visibleName = false
+                                    this.visibleName = false;
                                     break;
                               case 'href':
-                                    this.visibleHref = false
+                                    this.visibleHref = false;
                                     break;
                               case 'count':
-                                    this.visibleCount = false
+                                    this.visibleCount = false;
                                     break;
                         }
                   } else {
                         switch (res) {
                               case 'name':
-                                    this.visibleName = true
+                                    this.visibleName = true;
                                     break;
                               case 'href':
-                                    this.visibleHref = true
+                                    this.visibleHref = true;
                                     break;
                               case 'count':
-                                    this.visibleCount = true
+                                    this.visibleCount = true;
                                     break;
                         }
                   }
@@ -190,7 +202,8 @@ export default {
                   font-size: 12px;
                   line-height: 15px;
                   color: #B4B4B4;
-                  &:focus{
+
+                  &:focus {
                         border: 2px solid #FF8484;
                   }
             }
@@ -220,33 +233,35 @@ export default {
                   font-size: 12px;
                   line-height: 15px;
                   color: #B4B4B4;
-                  &:focus{
+
+                  &:focus {
                         border: 2px solid #FF8484;
                   }
             }
 
-            &__btn {
-                  margin: 8px 0 0;
-                  height: 36px;
-                  border: none;
-                  background: #EEEEEE;
-                  border-radius: 10px;
-                  transition: 0.4s;
+      }
 
-                  font-family: 'Inter';
-                  font-weight: 600;
-                  font-size: 12px;
-                  line-height: 15px;
-                  /* identical to box height */
+      &__btn {
+            margin: 8px 0 0;
+            height: 36px;
+            border: none;
+            background: #EEEEEE;
+            border-radius: 10px;
+            transition: 0.4s;
 
-                  text-align: center;
-                  letter-spacing: -0.02em;
+            font-family: 'Inter';
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            /* identical to box height */
 
-                  /* Greys / 500 */
+            text-align: center;
+            letter-spacing: -0.02em;
 
-                  color: #B4B4B4;
+            /* Greys / 500 */
 
-            }
+            color: #B4B4B4;
+
       }
 }
 
