@@ -1,7 +1,8 @@
 <template>
       <aside class="aside">
             <div class="aside__body"
-                 @mousemove="active">
+                 @mousemove="active"
+            >
                   <p class="aside__body__legend --obligatory">Наименование товара</p>
                   <div class="aside__body__block">
                         <input
@@ -16,7 +17,6 @@
                               class="aside__body__err"
                         >Поле является обязательным</p>
                   </div>
-
                   <p class="aside__legend">Описание товара</p>
                   <textarea
                         class="aside__body__description"
